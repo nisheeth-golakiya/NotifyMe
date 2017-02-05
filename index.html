@@ -1,9 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-	<title></title>
-</head>
-<body>
-Your Dashborad will be ready soon!!!
-</body>
+  <head>
+    <title>Gmail API demo</title>
+    <meta charset="UTF-8">
+	
+
+    
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css"rel="stylesheet" />
+    <style>
+      .hidden{ display: none; }
+      iframe {
+  width: 100%;
+  border: 0;
+  min-height: 80%;
+  height: 600px;
+  display: flex;
+}
+    </style>
+  </head>
+  <body>
+      <script src="jquery-3.1.1.min.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="script.js"></script> 
+        <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+    <div class="container">
+      <h1>Gmail API demo</h1>
+
+      <button id="authorize-button" class="btn btn-primary hidden">Authorize</button>
+
+      <table class="table table-striped table-inbox hidden">
+        <thead>
+          <tr>
+            <th>From</th>
+            <th>Subject</th>
+            <th>Date/Time</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    
+
+  </body>
 </html>
