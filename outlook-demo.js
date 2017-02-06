@@ -2,7 +2,7 @@ $(function() {
   // App configuration
   var authEndpoint = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize?';
   var apiEndpoint = 'https://outlook.office.com/api/v2.0';
-  var redirectUri = 'http://localhost/NotifyMe';
+  var redirectUri = 'https://rnehra01.github.io/NotifyMe';
   var appId = '5a78adf8-b0af-47d3-a919-a0a93a8eebaa';
   var scopes = 'openid profile https://outlook.office.com/mail.read';
 
