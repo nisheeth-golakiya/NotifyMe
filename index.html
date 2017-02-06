@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
 	
 
-    
+    <link href="style.css" rel="stylesheet" type="text/css" />
     <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css"rel="stylesheet" />
     <style>
       .hidden{ display: none; }
@@ -19,9 +19,12 @@
     </style>
   </head>
   <body>
+  <script src="//kjur.github.io/jsrsasign/jsrsasign-latest-all-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
       <script src="jquery-3.1.1.min.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="script.js"></script> 
+    <script src="outlook-demo.js"></script>
         <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
     <div class="container">
       <h1>Gmail API demo</h1>
@@ -39,6 +42,32 @@
         <tbody></tbody>
       </table>
     </div>
+
+      <a class="btn btn-lg btn-primary" href="#" role="button" id="connect-button">Connect to Outlook</a>
+     <a class="btn btn-lg btn-primary" role="button" id="signout">sign-out</a>
+
+    <table class="table table-striped" id="message-list">
+        <thead>
+          <tr>
+            <th>From</th>
+            <th>Subject</th>
+            <th>Date/Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <script id="msg-list-template" type="text/x-handlebars-template">
+            {{#each messages}}
+            <tr>
+              <td>{{this.From.EmailAddress.Name}}</td>
+              <td>
+                <a href="#message-modal-"+{{this.id}} " data-toggle="modal" id="message-link- + message.id+"> {{this.Subject}} </a>
+              </td>
+              <td>{{formatDate this.ReceivedDateTime}}</td>
+            </tr>
+            {{/each}}
+          </script>
+        </tbody>
+      </table>
     
 
   </body>
