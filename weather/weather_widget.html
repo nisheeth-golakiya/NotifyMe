@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<body >
+
+<h2>Weather</h2>
+<button onclick="getLocation()">asdf</button>
+
+
+<script>
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.watchPosition(showPosition);
+    }
+}
+function showPosition(position) {
+var lat = position.coords.latitude;
+var lon = position.coords.longitude;
+var abc="https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='("+lat+","+lon+")')&format=json&callback=callbackFunction";
+
+loadjsfile(abc);
+}
+
+function loadjsfile(filename){
+//if filename is a external JavaScript file
+  var fileref=document.createElement('script');
+  fileref.setAttribute("type","text/javascript");
+  fileref.setAttribute("src", filename);
+  document.body.appendChild(fileref);
+ }
+ var callbackFunction = function(data) {
+	var windspeed = data.query.results.channel.wind.speed;
+	var forecast=data.query.results.channel.item.condition.text;
+	var temp=data.query.results.channel.item.condition.temp;
+	var humid=data.query.results.channel.atmosphere.humidity;
+  var city=data.query.results.channel.location.city;
+	
+  var divloc = document.getElementById("city");
+  divloc.innerHTML="City : " + city;
+  var divws = document.getElementById("windspeed");
+  divws.innerHTML="Windspeed : " + windspeed + "km/h";
+  var divforecast = document.getElementById("forecast");
+  divforecast.innerHTML="Forecast : " + forecast;
+  var divtemp = document.getElementById("temp");
+  divtemp.innerHTML="Temperature : " + temp + " F";
+  var divhumid = document.getElementById("humid");
+  divhumid.innerHTML="Humidity : " + humid + "%";
+
+  var img = document.getElementById('weatherimage');
+  if (forecast=="Cloudy"){img.src = "cloudy.png";}
+  else if(forecast=="Sunny"){img.src = "sunny.png"}
+  else img.src = "suncloudy.png";
+
+  }
+
+</script>
+<div id="weathercard">
+<img id="weatherimage"></img>
+<div id="city" style="padding-left: 100px">City : </div>
+<div id="windspeed" style="padding-left: 100px">Windspeed : </div>
+<div id="forecast" style="padding-left: 100px">Forecast : </div>
+<div id="temp" style="padding-left: 100px">Temperature : </div>
+<div id="humid" style="padding-left: 100px">Humidity : </div>
+</div>
+
+</body>
+</html>
