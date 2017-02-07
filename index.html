@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
 
   <!--Import Google Icon Font-->
-     <link href="//fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">
+      <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
       <link href="styles.css" rel="stylesheet">
         <link rel="stylesheet" href="stylestodo.css">
@@ -18,7 +18,7 @@
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
             <script type="text/javascript" src="scriptgmail.js"></script>
             <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
-             
+            <script src="outlook-demo.js"></script>
             
             
             
@@ -28,150 +28,264 @@
                     
                 });
                 </script>
-            </br>
-            <div class="row">
-           <div class="col m10 offset-m1">     
-        <ul class="collapsible popout collapsible-accordion" data-collapsible="accordion">
-          <li>
-            <div class="collapsible-header active"><i class="material-icons">subtitles</i>Gmail</div>
-            <div class="collapsible-body">
-                                              <button id="authorize-button" class="btn btn-primary hidden">Authorize</button>
-                                              <table class="table table-striped table-inbox hidden">
-                                                  <thead>
-                                                      <tr>
-                                                          <th>From</th>
-                                                          <th>Subject</th>
-                                                          <th>Date/Time</th>
-                                                      </tr>
-                                                  </thead>
-                                                  <tbody></tbody>
-                                              </table>
-                
-              </div>
-          </li>
-          <li>
-            <div class="collapsible-header"><i class="material-icons">games</i>Outlook</div>
-            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></div>
-          </li>
-          
-        </ul>
-        </div>
-            </div>
-            <div class="row ">
-                <div class="col m4 offset-m1">
-                    <div class="card large z-depth-5">
-                        <div class="card-image waves-effect waves-block waves-light">
-                            <img class="activator" src="8bW7nFdW5NYqLecpbbdQPZ2k.jpeg">
-                        </div>
-                        <div class="card-content">
-                            <div class="row">
-                                <div class="col m3"><span class="card-title activator grey-text text-darken-4">Weather</span></div>
-                                <div class="col m1 right card-title activator"><i class="material-icons right">more_vert</i></div>
-                                
-                            </div>
-                            <p><a href="#!">This is a link</a></p>
-                        </div>
-                        <div class="card-reveal" style="overflow:hidden;">
-                            <div class="row">
-                                <div class="col m4"><span class="card-title grey-text text-darken-4">Weather</span></div>
-                                <div class="col m1 right card-title"><i class="material-icons">close</i></div>
-                            </div>
-                            
-                            <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                        </div>
+            <div class="whole">
+                <nav>
+                    <div class="nav-wrapper red z-depth-3">
+                        <div class="brand-logo center" style="cursor:pointer;font-size:3em;">My Dashboard</div>
+                        
+                    </div>
+                </nav>
+                </br>
+                <div class="row">
+                    <div class="col m10 offset-m1">
+                        <ul class="collapsible popout collapsible-accordion" data-collapsible="accordion">
+                            <li>
+
+                                <div class="collapsible-header active" style="height:60px;padding-top:5px"><h3><i class="material-icons">markunread_mailbox</i>Gmail</h3></div>
+                                <div class="collapsible-body">
+                                    <button id="authorize-button" class="btn btn-primary hidden">Authorize</button>
+                                    <table class="table table-striped table-inbox hidden">
+                                        <thead>
+                                            <tr>
+                                                <th>From</th>
+                                                <th>Subject</th>
+                                                <th>Date/Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+
+                                </div>
+                            </li>
+                            <li>
+
+                                <div class="collapsible-header" style="height:60px;padding-top:5px"><h3><i class="material-icons">question_answer</i>Outlook</h3></div>
+                                <div class="collapsible-body">
+                                    <a class="btn btn-lg btn-primary" href="#" role="button" id="connect-button">Connect to Outlook</a>
+                                    <a class="btn btn-lg btn-primary" role="button" id="signout">sign-out</a>
+                                    <table class="table table-striped" id="message-list">
+                                        <thead>
+                                            <tr>
+                                                <th>From</th>
+                                                <th>Subject</th>
+                                                <th>Date/Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <script id="msg-list-template" type="text/x-handlebars-template">
+                                                {{#each messages}}
+                                                <tr>
+                                                    <td>{{this.From.EmailAddress.Name}}</td>
+                                                    <td>
+                                                        <a href="#message-modal-" +{{this.id}} " data-toggle="modal" id="message-link- + message.id+"> {{this.Subject}} </a>
+                                                    </td>
+                                                    <td>{{formatDate this.ReceivedDateTime}}</td>
+                                                </tr>
+                                                {{/each}}
+                                            </script>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </li>
+
+                        </ul>
                     </div>
                 </div>
-                <div class="col m6" >
-                    <div class="card blue-grey darken-1 todolist z-depth-4" style="overflow-y:scroll;overflow-x:hidden;">
-            <div class="card-content white-text">
-              <span class="card-title"><h3> To Do List</h3></span>
-                <div class="header row">
-                    
-                    <!--<input type="text" id="myInput" placeholder="Title..."/>-->
-                    <div class="input-field col s6">
-                        <input type="text" class="validate" id="myInput">
-                        <label class="active" for="first_name2">Add here</label>
+                <div class="row ">
+                    <div class="col m4 offset-m1">
+                        <div class="card large z-depth-5">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" src="8bW7nFdW5NYqLecpbbdQPZ2k.jpeg" style="height:100%">
+                            </div>
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col m3"><span class="card-title activator grey-text text-darken-4">Weather</span></div>
+                                    <div class="col m1 right card-title activator"><i class="material-icons right">more_vert</i></div>
+
+                                </div>
+
+                            </div>
+                            <div class="card-reveal" style="overflow:hidden;">
+                                <div class="row">
+                                    <div class="col m4"><span class="card-title grey-text text-darken-4" id="cityname"></span></div>
+                                    <div class="col m1 right card-title"><i class="material-icons">close</i></div>
+                                </div>
+
+
+                                <div id="weathercard">
+                                    <!--<div id="city" style="padding-left: 100px">City : </div>
+                            <div id="windspeed" style="padding-left: 100px">Windspeed : </div>
+                            <div id="forecast" style="padding-left: 100px">Forecast : </div>
+                            <div id="temp" style="padding-left: 100px">Temperature : </div>
+                            <div id="humid" style="padding-left: 100px">Humidity : </div>-->
+                                    <div class="row">
+                                        <div class="col m3 offset-m1">
+                                            <h2 id="temp"></h2>
+                                        </div>
+                                        <div class="col m2">
+                                            <img id="weatherimage" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col m4 offset-m1">
+                                            <h3 id="humid"></h3>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col m8 offset-m1"><h3 id="wind"></h3></div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col s3">
-                        <div class="btn-floating btn-large waves-effect waves-light red addBtn" onclick="newElement()"><i class="material-icons">add</i></div>
+                    <div class="col m6">
+                        <div class="card blue-grey darken-1 todolist z-depth-4" style="overflow-y:scroll;overflow-x:hidden;">
+                            <div class="card-content white-text">
+                                <span class="card-title"><h2>What's up for Today</h2></span>
+                                </br>
+                                <div class="header row">
+
+                                    <!--<input type="text" id="myInput" placeholder="Title..."/>-->
+                                    <div class="input-field col s9">
+                                        <input type="text" class="validate" id="myInput">
+                                        <label class="active" for="first_name2">Add here</label>
+                                    </div>
+                                    <div class="col s3"style="float:right;">
+                                        <div class="btn-floating btn-large waves-effect waves-light red addBtn" onclick="newElement()"><i class="material-icons">add</i></div>
+                                    </div>
+                                    <!--<span onclick="newElement()" class="addBtn">Add</span>-->
+                                    </br>
+
+                                </div>
+
+                                <div class="collection" id="myDIV">
+                                    <a href="#!" class="collection-item" style="text-decoration:none;">Code</a>
+                                    <a href="#!" class="collection-item" style="text-decoration:none;">Fun</a>
+                                    <a href="#!" class="collection-item" style="text-decoration:none;">Do</a>
+                                    
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                    <!--<span onclick="newElement()" class="addBtn">Add</span>-->
-                    </br>
 
                 </div>
-
-                <div class="collection" id="myDIV">
-                    <a href="#!" class="collection-item">Alan</a>
-                    <a href="#!" class="collection-item">Alan</a>
-                    <a href="#!" class="collection-item">Alan</a>
-                    <a href="#!" class="collection-item">Alan</a>
-                </div>
             </div>
+                <script type="text/javascript">
+                    var myNodelist = document.getElementsByClassName("collection-item");
+                    var i;
+                    for (i = 0; i < myNodelist.length; i++) {
+                        var span = document.createElement("SPAN");
+                        var txt = document.createTextNode("\u00D7");
+                        span.className = "close";
+                        span.appendChild(txt);
+                        myNodelist[i].appendChild(span);
+                    }
+
+                    // Click on a close button to hide the current list item
+                    var close = document.getElementsByClassName("close");
+                    var i;
+                    for (i = 0; i < close.length; i++) {
+                        close[i].onclick = function () {
+                            var div = this.parentElement;
+                            div.style.display = "none";
+                        }
+                    }
+
+                    // Add a "checked" symbol when clicking on a list item
+                    var list = document.querySelector('div.collection');
+                    list.addEventListener('click', function (ev) {
+                        if (ev.target.className === 'collection-item checked' || ev.target.className === 'collection-item') {
+                            ev.target.classList.toggle('checked');
+
+                        }
+                    }, false);
+
+                    // Create a new list item when clicking on the "Add" button
+                    function newElement() {
+                        var li = document.createElement("a");
+
+                        var inputValue = document.getElementById("myInput").value;
+
+                        var t = document.createTextNode(inputValue);
+                        li.appendChild(t);
+                        li.className = "collection-item";
+                        li.style.textDecoration = "none";
+                        li.style.cursor = "pointer";
+                        if (inputValue === '') {
+                            alert("You must write something!");
+                        } else {
+                            document.getElementById("myDIV").appendChild(li);
+                        }
+                        document.getElementById("myInput").value = "";
+
+                        var span = document.createElement("SPAN");
+                        var txt = document.createTextNode("\u00D7");
+                        span.className = "close";
+                        span.appendChild(txt);
+                        li.appendChild(span);
+
+                        for (i = 0; i < close.length; i++) {
+                            close[i].onclick = function () {
+                                var div = this.parentElement;
+                                div.style.display = "none";
+                            }
+                        }
+                    }
+                </script>
+
+                <script>
+
+                    function getLocation() {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.watchPosition(showPosition);
+                        }
+                    }
+                    function showPosition(position) {
+                        var lat = position.coords.latitude;
+                        var lon = position.coords.longitude;
+                        var abc = "https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='(" + lat + "," + lon + ")')&format=json&callback=callbackFunction";
+
+                        loadjsfile(abc);
+                    }
+
+                    function loadjsfile(filename) {
+                        //if filename is a external JavaScript file
+                        var fileref = document.createElement('script');
+                        fileref.setAttribute("type", "text/javascript");
+                        fileref.setAttribute("src", filename);
+                        document.body.appendChild(fileref);
+                    }
+                    var callbackFunction = function (data) {
+                        var windspeed = data.query.results.channel.wind.speed;
+                        var forecast = data.query.results.channel.item.condition.text;
+                        var temp = data.query.results.channel.item.condition.temp;
+                        var humid = data.query.results.channel.atmosphere.humidity;
+                        var city = data.query.results.channel.location.city;
+                        var img = document.getElementById('weatherimage');
+                        var city = data.query.results.channel.location.city;
+                        var t = document.getElementById("temp");
+                        tc = (((temp - 32) * 5) / 9);
+                        tc = tc - (tc) % (0.01);
+                        t.innerHTML = tc + " C";
+                        var divloc = document.getElementById("cityname");
+                        divloc.innerHTML = "<h1>" + city + "</h1>";
+                        var divhumid = document.getElementById("humid");
+                        divhumid.innerHTML = "Humidity : " + humid + "%";
+                        var divws = document.getElementById("wind");
+                        divws.innerHTML = "Windspeed : " + windspeed + "km/h";
+
+                        if (forecast == "Cloudy") { img.src = "cloud.png"; }
+                        else if (forecast == "Sunny") { img.src = "sun.png"; }
+                        else if (forecast = "Rainy") { img.src = "rain.png"; }
+                        else { img.src = "suncloud.png"; }
+
+                    }
+                    getLocation();
+                </script>
             
-          </div>
-                </div>
-                
-                </div>
-                
-            <script type="text/javascript">
-var myNodelist = document.getElementsByClassName("collection-item");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  myNodelist[i].appendChild(span);
-}
 
-// Click on a close button to hide the current list item
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
-  }
-}
-
-// Add a "checked" symbol when clicking on a list item
-var list = document.querySelector('div.collection');
-list.addEventListener('click', function(ev) {
-  if (ev.target.className === 'collection-item checked'||ev.target.className === 'collection-item') {
-      ev.target.classList.toggle('checked');
-
-  }
-}, false);
-
-// Create a new list item when clicking on the "Add" button
-function newElement() {
-  var li = document.createElement("a");
-
-  var inputValue = document.getElementById("myInput").value;
-
-  var t = document.createTextNode(inputValue);
-  li.appendChild(t);
-  li.className="collection-item";
-  if (inputValue === '') {
-    alert("You must write something!");
-  } else {
-    document.getElementById("myDIV").appendChild(li);
-  }
-  document.getElementById("myInput").value = "";
-
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  li.appendChild(span);
-
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-      var div = this.parentElement;
-      div.style.display = "none";
-    }
-  }
-}
-            </script>
         </body>
 </html>

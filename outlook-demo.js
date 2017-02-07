@@ -2,8 +2,8 @@ $(function() {
   // App configuration
   var authEndpoint = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize?';
   var apiEndpoint = 'https://outlook.office.com/api/v2.0';
-  var redirectUri = 'https://rnehra01.github.io/NotifyMe';
-  var appId = '5a78adf8-b0af-47d3-a919-a0a93a8eebaa';
+  var redirectUri = 'https://rnehra01.github.io/NotifyMe/';
+  var appId = '87524278-c84a-4bf6-95c6-2f1b897dd40b';
   var scopes = 'openid profile https://outlook.office.com/mail.read';
 
   // Check for browser support for sessionStorage
@@ -394,8 +394,8 @@ $(function() {
           method: 'GET',
           email: emailAddress,
           query: {
-            // Limit to the first 10 messages
-            '$top': 10,
+            // Limit to the first 4 messages
+            '$top': 4,
             // Only return fields we will use
             '$select': 'Subject,From,ReceivedDateTime,BodyPreview',
             // Sort by received time, newest first
