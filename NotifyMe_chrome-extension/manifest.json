@@ -1,0 +1,12 @@
+{
+  "manifest_version": 2,
+  "name": "NotifyMe",
+  "version": "0.1",
+  "browser_action": {
+    "default_title": "Your title"
+},
+"background": {
+    "scripts": ["background.js"],
+    "persistent": false
+}
+}
