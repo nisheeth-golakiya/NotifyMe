@@ -1,74 +1,177 @@
-<!doctype html>
 <html>
-  <head>
-    <title>Gmail API demo</title>
-    <meta charset="UTF-8">
-	
+    <head>
+        <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
 
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css"rel="stylesheet" />
-    <style>
-      .hidden{ display: none; }
-      iframe {
-  width: 100%;
-  border: 0;
-  min-height: 80%;
-  height: 600px;
-  display: flex;
+  <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <link href="styles.css" rel="stylesheet">
+        <link rel="stylesheet" href="stylestodo.css">
+  
+        </head>
+        <body>
+            <script src="//kjur.github.io/jsrsasign/jsrsasign-latest-all-min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+            <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+            <script type="text/javascript" src="scriptgmail.js"></script>
+            <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+             
+            
+            
+            
+             <script type="text/javascript">
+                $(document).ready(function(){
+                    $('.collapsible').collapsible();
+                    
+                });
+                </script>
+            </br>
+            <div class="row">
+           <div class="col m10 offset-m1">     
+        <ul class="collapsible popout collapsible-accordion" data-collapsible="accordion">
+          <li>
+            <div class="collapsible-header active"><i class="material-icons">subtitles</i>Gmail</div>
+            <div class="collapsible-body">
+                                              <button id="authorize-button" class="btn btn-primary hidden">Authorize</button>
+                                              <table class="table table-striped table-inbox hidden">
+                                                  <thead>
+                                                      <tr>
+                                                          <th>From</th>
+                                                          <th>Subject</th>
+                                                          <th>Date/Time</th>
+                                                      </tr>
+                                                  </thead>
+                                                  <tbody></tbody>
+                                              </table>
+                
+              </div>
+          </li>
+          <li>
+            <div class="collapsible-header"><i class="material-icons">games</i>Outlook</div>
+            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></div>
+          </li>
+          
+        </ul>
+        </div>
+            </div>
+            <div class="row ">
+                <div class="col m4 offset-m1">
+                    <div class="card large z-depth-5">
+                        <div class="card-image waves-effect waves-block waves-light">
+                            <img class="activator" src="8bW7nFdW5NYqLecpbbdQPZ2k.jpeg">
+                        </div>
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="col m3"><span class="card-title activator grey-text text-darken-4">Weather</span></div>
+                                <div class="col m1 right card-title activator"><i class="material-icons right">more_vert</i></div>
+                                
+                            </div>
+                            <p><a href="#!">This is a link</a></p>
+                        </div>
+                        <div class="card-reveal" style="overflow:hidden;">
+                            <div class="row">
+                                <div class="col m4"><span class="card-title grey-text text-darken-4">Weather</span></div>
+                                <div class="col m1 right card-title"><i class="material-icons">close</i></div>
+                            </div>
+                            
+                            <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col m6" >
+                    <div class="card blue-grey darken-1 todolist z-depth-4" style="overflow-y:scroll;overflow-x:hidden;">
+            <div class="card-content white-text">
+              <span class="card-title"><h3> To Do List</h3></span>
+                <div class="header row">
+                    
+                    <!--<input type="text" id="myInput" placeholder="Title..."/>-->
+                    <div class="input-field col s6">
+                        <input type="text" class="validate" id="myInput">
+                        <label class="active" for="first_name2">Add here</label>
+                    </div>
+                    <div class="col s3">
+                        <div class="btn-floating btn-large waves-effect waves-light red addBtn" onclick="newElement()"><i class="material-icons">add</i></div>
+                    </div>
+                    <!--<span onclick="newElement()" class="addBtn">Add</span>-->
+                    </br>
+
+                </div>
+
+                <div class="collection" id="myDIV">
+                    <a href="#!" class="collection-item">Alan</a>
+                    <a href="#!" class="collection-item">Alan</a>
+                    <a href="#!" class="collection-item">Alan</a>
+                    <a href="#!" class="collection-item">Alan</a>
+                </div>
+            </div>
+            
+          </div>
+                </div>
+                
+                </div>
+                
+            <script type="text/javascript">
+var myNodelist = document.getElementsByClassName("collection-item");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
 }
-    </style>
-  </head>
-  <body>
-  <script src="//kjur.github.io/jsrsasign/jsrsasign-latest-all-min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
-      <script src="jquery-3.1.1.min.js"></script>
-    <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="script.js"></script> 
-    <script src="outlook-demo.js"></script>
-        <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
-    <div class="container">
-      <h1>Gmail API demo</h1>
 
-      <button id="authorize-button" class="btn btn-primary hidden">Authorize</button>
+// Click on a close button to hide the current list item
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
 
-      <table class="table table-striped table-inbox hidden">
-        <thead>
-          <tr>
-            <th>From</th>
-            <th>Subject</th>
-            <th>Date/Time</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
+// Add a "checked" symbol when clicking on a list item
+var list = document.querySelector('div.collection');
+list.addEventListener('click', function(ev) {
+  if (ev.target.className === 'collection-item checked'||ev.target.className === 'collection-item') {
+      ev.target.classList.toggle('checked');
 
-      <a class="btn btn-lg btn-primary" href="#" role="button" id="connect-button">Connect to Outlook</a>
-     <a class="btn btn-lg btn-primary" role="button" id="signout">sign-out</a>
+  }
+}, false);
 
-    <table class="table table-striped" id="message-list">
-        <thead>
-          <tr>
-            <th>From</th>
-            <th>Subject</th>
-            <th>Date/Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          <script id="msg-list-template" type="text/x-handlebars-template">
-            {{#each messages}}
-            <tr>
-              <td>{{this.From.EmailAddress.Name}}</td>
-              <td>
-                <a href="#message-modal-"+{{this.id}} " data-toggle="modal" id="message-link- + message.id+"> {{this.Subject}} </a>
-              </td>
-              <td>{{formatDate this.ReceivedDateTime}}</td>
-            </tr>
-            {{/each}}
-          </script>
-        </tbody>
-      </table>
-    
+// Create a new list item when clicking on the "Add" button
+function newElement() {
+  var li = document.createElement("a");
 
-  </body>
+  var inputValue = document.getElementById("myInput").value;
+
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  li.className="collection-item";
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("myDIV").appendChild(li);
+  }
+  document.getElementById("myInput").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+}
+            </script>
+        </body>
 </html>

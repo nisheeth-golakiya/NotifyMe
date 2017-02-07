@@ -45,7 +45,7 @@
               var request = gapi.client.gmail.users.messages.list({
             'userId': 'me',
             'labelIds': 'INBOX',
-            'maxResults': 10
+            'maxResults': 3
          });
 
             request.execute(function(response) {
@@ -72,7 +72,7 @@
       <td>'+getHeader(message.payload.headers, 'Date')+'</td>\
     </tr>'
   );
-  $('body').append(
+  $('.collapsible-body').append(
   '<div class="modal fade" id="message-modal-' + message.id +
       '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\
     <div class="modal-dialog modal-lg">\
