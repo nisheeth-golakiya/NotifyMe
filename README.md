@@ -8,6 +8,11 @@ So, we're developing which help you to keep track of your important stuff.
 
 #### A chrome-extension that will serve as your dashboard, keeps you updated of important stuff with one click.
 
+* Shows unread gmail messages
+* Shows outlook messages
+* Your To-Do
+* Weather
+
 A working demo is given in this [video](https://youtu.be/iMNjzHnxy5s)
 
 #### Contributors:
