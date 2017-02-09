@@ -45,7 +45,8 @@
               var request = gapi.client.gmail.users.messages.list({
             'userId': 'me',
             'labelIds': 'INBOX',
-            'maxResults': 4
+            'maxResults': 4,
+            'q' : 'is:unread'
          });
 
             request.execute(function(response) {
