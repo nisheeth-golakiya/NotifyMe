@@ -3,7 +3,7 @@
   "name": "NotifyMe",
   "version": "0.1",
   "browser_action": {
-    "default_title": "Your title"
+    "default_title": "NotifyMe"
 },
 "background": {
     "scripts": ["background.js"],
