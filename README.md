@@ -12,6 +12,7 @@ So, we're developing which help you to keep track of your important stuff.
 * Shows outlook messages
 * Your To-Do
 * Weather
+All at one place
 
 A working demo is given in this [video](https://youtu.be/iMNjzHnxy5s)
 
